@@ -58,7 +58,7 @@ export const google = async (req, res, next) => {
       const newUser = new User({
         username:
           req.body.name.split(' ').join('').toLowerCase() +
-          (Math.floor(Math.random() * 10000)).toString(),
+          Math.floor(Math.random() * 10000).toString(),
         email: req.body.email,
         password: hashedPassword,
         profilePicture: req.body.photo,
@@ -78,4 +78,8 @@ export const google = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+export const signout = async (req, res) => {
+  res.clearCookie('access_token').status(200).json('Signout success!');
 };
